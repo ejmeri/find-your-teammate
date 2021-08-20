@@ -1,7 +1,6 @@
 from extensions import mongo
 from bson import ObjectId
 
-
 class UserRepository():
 
     def findById(id):

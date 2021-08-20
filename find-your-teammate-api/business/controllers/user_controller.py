@@ -13,7 +13,6 @@ from business.users.control.user_repository import UserRepository
 
 userController = Blueprint('user_controller', __name__)
 
-
 class UserController():
 
     @userController.route('/csgo')
@@ -27,16 +26,16 @@ class UserController():
     def create():
         payload = request.json
 
-        if not 'email' in payload.keys():
-            return ApiReturn.error('Email obrigatório'), 400
-
         if not 'login' in payload.keys():
             return ApiReturn.error('Login obrigatória'), 400            
 
         if not 'password' in payload.keys():
             return ApiReturn.error('Senha obrigatória'), 400
         
-        user = User(**payload)
+        try:
+            user = User(**payload)
+        except Exception as error:
+            return ApiReturn.error('Erro durante o processamento', str(error)), 500
 
         userExist = UserRepository.findByLogin(user.login)
         if userExist:

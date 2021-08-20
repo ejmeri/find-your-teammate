@@ -7,12 +7,11 @@ from datetime import datetime
 
 class User():
     
-    def __init__(self, email, login, password):
+    def __init__(self, login, password):
         self._id = objectid.ObjectId()
-        self.email: str = email
         self.login: str = login
         self.password: str = password
-        self.active: bool = True;
+        self.active: bool = True
         self.createDate: datetime = datetime.utcnow()
 
     def hashPassword(self):
@@ -36,8 +35,7 @@ class User():
         return {
             '_id': self._id,
             'login': self.login,
-            'password': self.password,
-            'email': self.email,
             'active': self.active,
+            'password': self.password,
             'createDate': self.createDate
         }

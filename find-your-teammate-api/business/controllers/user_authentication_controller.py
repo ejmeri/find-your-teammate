@@ -1,5 +1,5 @@
 
-from flask import  request
+from flask import request
 from flask.blueprints import Blueprint
 
 from business.shared.api_return import ApiReturn
@@ -11,12 +11,12 @@ from business.users.control.user_repository import UserRepository
 
 
 userAuthenticationController = Blueprint(
-    'user_authentication_controller', __name__)
+    'user_authentication_controller', __name__, url_prefix='/users/authentication')
 
 
 class UserAuthenticationController():
 
-    @userAuthenticationController.post('/users/authentication')
+    @userAuthenticationController.post('')
     def authenticate():
         payload = request.json
 
@@ -32,8 +32,7 @@ class UserAuthenticationController():
         if not userDb:
             return ApiReturn.error('Login não encontrado'), 400
 
-        if  userAuth.comparePassword(userDb['password']):
+        if userAuth.comparePassword(userDb['password']):
             return ApiReturn.success(response=UserAuth.encode_auth_token({'login': userDb['login'], 'id': str(userDb['_id'])})), 200
-        
-        return ApiReturn.error('Senha incorreta'), 400
 
+        return ApiReturn.error('Senha incorreta'), 400

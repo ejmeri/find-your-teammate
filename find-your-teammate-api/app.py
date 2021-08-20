@@ -4,10 +4,11 @@ from extensions import mongo
 
 from test import simple_page
 from business.controllers.user_controller import userController
-from business.controllers.user_authentication import userAuthenticationController
+from business.controllers.user_authentication_controller import userAuthenticationController
 
 
 app = Flask(__name__)
+
 app.register_blueprint(simple_page)
 app.register_blueprint(userController)
 app.register_blueprint(userAuthenticationController)

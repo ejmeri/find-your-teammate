@@ -11,7 +11,8 @@ from business.users.entity.user_auth import UserAuth
 
 from business.users.control.user_repository import UserRepository
 
-userController = Blueprint('user_controller', __name__)
+userController = Blueprint('user_controller', __name__, url_prefix='/users')
+
 
 class UserController():
 
@@ -22,16 +23,16 @@ class UserController():
 
         return response.toJson()
 
-    @userController.post('/users')
+    @userController.post('')
     def create():
         payload = request.json
 
         if not 'login' in payload.keys():
-            return ApiReturn.error('Login obrigatória'), 400            
+            return ApiReturn.error('Login obrigatória'), 400
 
         if not 'password' in payload.keys():
             return ApiReturn.error('Senha obrigatória'), 400
-        
+
         try:
             user = User(**payload)
         except Exception as error:
@@ -43,21 +44,21 @@ class UserController():
 
         user.hashPassword()
         UserRepository.create(user.toCreateJson())
-        
+
         return ApiReturn.success('Usuário salvo com sucesso', str(user._id)), 201
 
-    @userController.get('/users')
+    @userController.get('')
     def findAll():
         usersDb = UserRepository.findAll()
         users: User = []
-        
+
         for user in usersDb:
             user['_id'] = str(user['_id'])
             users.append(user)
 
-        return ApiReturn.success(response=users), 200  
+        return ApiReturn.success(response=users), 200
 
-    @userController.get('/users/<id>')
+    @userController.get('/<id>')
     def findById(id):
         if ObjectId.is_valid(id) == False:
             return ApiReturn.error('Id inválido'), 400
@@ -78,5 +79,5 @@ class UserController():
         if user:
             user['_id'] = str(user['_id'])
             return user
-            
+
         return ApiReturn.error('Usuário não encontrado'), 400

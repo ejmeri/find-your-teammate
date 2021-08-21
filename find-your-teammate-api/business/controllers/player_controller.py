@@ -1,17 +1,19 @@
-from business.users.entity.user_auth import UserAuth
-from business.players.control.player_info_repository import PlayerRepository
-from business.players.entity.player_info import Player
-from flask import request
 from flask.blueprints import Blueprint
+from flask import request
+import json
 
 from business.shared.api_return import ApiReturn
+from business.players.control.player_info_repository import PlayerRepository
+
+from business.users.entity.user_auth import UserAuth
+from business.players.entity.player_info import Player
+
 
 playerController = Blueprint('player_controller', __name__, url_prefix='/players')
 
 
 class PlayerController():
     
-
     @playerController.post('')
     def create():
         payload = request.json
@@ -23,10 +25,7 @@ class PlayerController():
             return ApiReturn.error('Id Steam é obrigatório'), 400
 
         if not 'name' in payload.keys():
-            return ApiReturn.error('Nome é obrigatório'), 400            
-
-        # if not 'userId' in payload.keys():
-        #     return ApiReturn.error('UserId é obrigatório'), 400
+            return ApiReturn.error('Nome é obrigatório'), 400
 
         auth_header = request.headers.get('Authorization')
         if auth_header:
@@ -38,6 +37,9 @@ class PlayerController():
             userAuth = UserAuth.decode_auth_token(auth_token)
         except RuntimeError as error:
             return ApiReturn.error('Acesso negado', error), 401            
+
+        if not userAuth['user_id']:
+            return ApiReturn.error('Erro na sessão logada, por favor, faça login novamente'), 400
 
         payload['userId'] = userAuth['user_id']
         try:
@@ -54,3 +56,29 @@ class PlayerController():
         PlayerRepository.create(player.toCreateJson())
 
         return ApiReturn.success('Informações salvas com sucesso', str(player._id)), 201
+
+
+    @playerController.get('/info')
+    def info():
+        auth_header = request.headers.get('Authorization')
+        if auth_header:
+            auth_token = auth_header.split(" ")[1]
+        else:
+            auth_token = ''
+
+        try:
+            userAuth = UserAuth.decode_auth_token(auth_token)
+        except RuntimeError as error:
+            return ApiReturn.error('Acesso negado', error), 401            
+
+        if not userAuth['user_id']:
+            return ApiReturn.error('Erro na sessão logada, por favor, faça login novamente'), 400
+
+        player = PlayerRepository.findByUserId(userAuth['user_id'])
+        if player:
+            player['_id']=str(player['_id'])
+            player['userId']=str(player['userId'])
+            
+            return ApiReturn.success(None, player), 200
+
+        return ApiReturn.success('Jogador não encontrado'), 200

@@ -14,6 +14,7 @@ class Player():
         self.about: str = about
         self.country: str = country
         self.active: bool = True
+        self.available: bool = True
         self.contact: Contact = None
         self.steamUserId: str = steamUser
         self.steamUserUrl: str = None
@@ -34,6 +35,7 @@ class Player():
             'createDate': self.createDate,
             'country': self.country,
             'active': self.active,
+            'available': self.available,
             'contact': self.contact,
             'steamUserId': self.steamUserId,
             'steamUserUrl': self.steamUserUrl,

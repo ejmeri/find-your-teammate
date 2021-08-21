@@ -31,7 +31,9 @@ class UserAuthenticationController:
             return ApiReturn.error('Login não encontrado'), 400
 
         if userAuth.comparePassword(userDb['password']):
+            authToken = UserAuth.encode_auth_token(
+                {'login': userDb['login'], 'id': str(userDb['_id'])})
             return ApiReturn.success(
-                response=UserAuth.encode_auth_token({'login': userDb['login'], 'id': str(userDb['_id'])}).encode('utf-8')), 200
+                response=authToken), 200
 
         return ApiReturn.error('Senha incorreta'), 400

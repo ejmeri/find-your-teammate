@@ -23,7 +23,7 @@ from src.business.controllers.post_controller import postController
 app = Flask(__name__)
 
 app.config.from_object('settings')
-app.config['JWT_TOKEN'] = os.getenv('JWT_TOKEN')
+app.config['JWT_TOKEN'] = os.getenv('SECRET_KEY')
 app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 mongo.init_app(app)
 
@@ -32,6 +32,7 @@ app.register_blueprint(userController)
 app.register_blueprint(userAuthenticationController)
 app.register_blueprint(playerController)
 app.register_blueprint(postController)
+
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=5000)

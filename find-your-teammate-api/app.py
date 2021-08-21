@@ -9,15 +9,7 @@ from src.business.controllers.user_controller import userController
 from src.business.controllers.user_authentication_controller import userAuthenticationController
 from src.business.controllers.player_controller import playerController
 from src.business.controllers.post_controller import postController
-
-# from src.business.controllers import playerController
-# from src.business.controllers import postController
-# from src.business.controllers import userAuthenticationController
-
-# app.register_blueprint(userController)
-# app.register_blueprint(userAuthenticationController)
-# app.register_blueprint(playerController)
-# app.register_blueprint(postController)
+from src.business.controllers.player_stats_controller import playerStatsController
 
 
 app = Flask(__name__)
@@ -32,7 +24,7 @@ app.register_blueprint(userController)
 app.register_blueprint(userAuthenticationController)
 app.register_blueprint(playerController)
 app.register_blueprint(postController)
-
+app.register_blueprint(playerStatsController)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=5000)

@@ -1,3 +1,4 @@
+from src.shared.extract_jwt_payload import ExtractJwtPayload
 from flask import request
 from bson.objectid import ObjectId
 from flask.blueprints import Blueprint
@@ -22,22 +23,13 @@ class PostController():
         if not 'content' in payload.keys():
             return ApiReturn.error('Conteúdo da publicação é obrigatório'), 400
 
-        auth_header = request.headers.get('Authorization')
-        if auth_header:
-            auth_token = auth_header.split(" ")[1]
-        else:
-            auth_token = ''
-
-        try:
-            userAuth = UserAuth.decode_auth_token(auth_token)
-        except RuntimeError as error:
-            return ApiReturn.error('Acesso negado', str(error)), 401
-
-        if not userAuth['user_id']:
-            return ApiReturn.error('Erro na sessão logada, por favor, faça login novamente'), 400
+        userAuth = ExtractJwtPayload.extract(request.headers.get('Authorization'))
+        if isinstance(userAuth, ApiReturn):
+            return userAuth
 
         payload['userId'] = userAuth['user_id']
         payload['userLogin'] = userAuth['login']
+
         try:
             post = Post(**payload)
         except Exception as error:
@@ -58,23 +50,12 @@ class PostController():
         if not 'content' in payload.keys():
             return ApiReturn.error('Conteúdo do comentário é obrigatório'), 400
 
-        auth_header = request.headers.get('Authorization')
-        if auth_header:
-            auth_token = auth_header.split(" ")[1]
-        else:
-            auth_token = ''
+        auth_user = ExtractJwtPayload.extract(request.headers.get('Authorization'))
+        if isinstance(auth_user, ApiReturn):
+            return auth_user 
 
-        try:
-            print(auth_token, ' auth_token')
-            userAuth = UserAuth.decode_auth_token(auth_token)
-        except RuntimeError as error:
-            return ApiReturn.error('Acesso negado', str(error)), 401
-
-        if not userAuth['user_id']:
-            return ApiReturn.error('Erro na sessão logada, por favor, faça login novamente'), 400
-
-        payload['userId'] = userAuth['user_id']
-        payload['userLogin'] = userAuth['login']
+        payload['userId'] = auth_user['user_id']
+        payload['userLogin'] = auth_user['login']
 
         try:
             comment = Comment(**payload)
@@ -91,25 +72,14 @@ class PostController():
         if ObjectId.is_valid(id) == False:
             return ApiReturn.error('Identificação do post inválida'), 400
 
-        auth_header = request.headers.get('Authorization')
-        if auth_header:
-            auth_token = auth_header.split(" ")[1]
-        else:
-            auth_token = ''
-
-        try:
-            userAuth = UserAuth.decode_auth_token(auth_token)
-        except RuntimeError as error:
-            return ApiReturn.error('Acesso negado', str(error)), 401
-
-        if not userAuth['user_id']:
-            return ApiReturn.error('Erro na sessão logada, por favor, faça login novamente'), 400
+        auth_user = ExtractJwtPayload.extract(request.headers.get('Authorization'))
+        if isinstance(auth_user, ApiReturn):
+            return auth_user
 
         commentsDb = PostRepository.findComments(id)
         if not commentsDb:
             return ApiReturn.success('Nenhum comentário encontrado'), 200
 
-        
         comments: Comment = []
         for comment in commentsDb['comments']:
             comment['_id'] = str(comment['_id'])

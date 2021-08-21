@@ -1,3 +1,4 @@
+from src.shared.extract_jwt_payload import ExtractJwtPayload
 from flask.blueprints import Blueprint
 from flask import request
 
@@ -8,11 +9,12 @@ from src.business.users.entity.user_auth import UserAuth
 from src.business.players.entity.player_info import Player
 
 
-playerController = Blueprint('player_controller', __name__, url_prefix='/players')
+playerController = Blueprint(
+    'player_controller', __name__, url_prefix='/players')
 
 
 class PlayerController():
-    
+
     @playerController.post('')
     def create():
         payload = request.json
@@ -26,21 +28,12 @@ class PlayerController():
         if not 'name' in payload.keys():
             return ApiReturn.error('Nome é obrigatório'), 400
 
-        auth_header = request.headers.get('Authorization')
-        if auth_header:
-            auth_token = auth_header.split(" ")[1]
-        else:
-            auth_token = ''
+        auth_user = ExtractJwtPayload.extract(
+            request.headers.get('Authorization'))
+        if isinstance(auth_user, ApiReturn):
+            return auth_user
 
-        try:
-            userAuth = UserAuth.decode_auth_token(auth_token)
-        except RuntimeError as error:
-            return ApiReturn.error('Acesso negado', str(error)), 401            
-
-        if not userAuth['user_id']:
-            return ApiReturn.error('Erro na sessão logada, por favor, faça login novamente'), 400
-
-        payload['userId'] = userAuth['user_id']
+        payload['userId'] = auth_user['user_id']
         try:
             player = Player(**payload)
         except Exception as error:
@@ -56,7 +49,6 @@ class PlayerController():
 
         return ApiReturn.success('Informações salvas com sucesso', str(player._id)), 201
 
-
     @playerController.get('/info')
     def info():
         auth_header = request.headers.get('Authorization')
@@ -68,16 +60,16 @@ class PlayerController():
         try:
             userAuth = UserAuth.decode_auth_token(auth_token)
         except RuntimeError as error:
-            return ApiReturn.error('Acesso negado', str(error)), 401            
+            return ApiReturn.error('Acesso negado', str(error)), 401
 
         if not userAuth['user_id']:
             return ApiReturn.error('Erro na sessão logada, por favor, faça login novamente'), 400
 
         player = PlayerRepository.findByUserId(userAuth['user_id'])
         if player:
-            player['_id']=str(player['_id'])
-            player['userId']=str(player['userId'])
-            
+            player['_id'] = str(player['_id'])
+            player['userId'] = str(player['userId'])
+
             return ApiReturn.success(None, player), 200
 
         return ApiReturn.success('Jogador não encontrado'), 200

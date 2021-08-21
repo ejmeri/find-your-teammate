@@ -11,7 +11,6 @@ userAuthenticationController = Blueprint(
     'user_authentication_controller', __name__, url_prefix='/users/authentication')
 
 
-# noinspection PyPep8Naming
 class UserAuthenticationController:
 
     @userAuthenticationController.post('')

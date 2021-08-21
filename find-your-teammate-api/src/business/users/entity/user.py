@@ -5,8 +5,9 @@ from bson import objectid
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
-class User():
-    
+
+class User:
+
     def __init__(self, login, password):
         self._id = objectid.ObjectId()
         self.login: str = login

@@ -1,12 +1,11 @@
 from flask.blueprints import Blueprint
 from flask import request
-import json
 
-from business.shared.api_return import ApiReturn
-from business.players.control.player_info_repository import PlayerRepository
+from src.shared.api_return import ApiReturn
+from src.business.players.control.player_info_repository import PlayerRepository
 
-from business.users.entity.user_auth import UserAuth
-from business.players.entity.player_info import Player
+from src.business.users.entity.user_auth import UserAuth
+from src.business.players.entity.player_info import Player
 
 
 playerController = Blueprint('player_controller', __name__, url_prefix='/players')

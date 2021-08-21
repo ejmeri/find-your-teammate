@@ -2,13 +2,13 @@ from flask import request
 from bson.objectid import ObjectId
 from flask.blueprints import Blueprint
 
-from business.shared.api_return import ApiReturn
-from business.users.entity.user_auth import UserAuth
+from src.shared.api_return import ApiReturn
+from src.business.users.entity.user_auth import UserAuth
 
-from business.posts.entity.post import Post
-from business.posts.entity.comment import Comment
+from src.business.posts.entity.post import Post
+from src.business.posts.entity.comment import Comment
 
-from business.posts.control.post_repository import PostRepository
+from src.business.posts.control.post_repository import PostRepository
 
 postController = Blueprint('post_controller', __name__, url_prefix='/posts')
 

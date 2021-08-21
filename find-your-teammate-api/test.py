@@ -24,3 +24,7 @@ def test():
     #     return { 'status': False, 'message': response.message }
     
     return response
+
+@simple_page.get('/healthy/ping')
+def ping():
+    return 'pong', 200

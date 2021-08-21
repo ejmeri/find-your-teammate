@@ -2,7 +2,7 @@
 from bson import ObjectId
 from datetime import datetime
 
-from business.players.entity.contact import Contact
+from src.business.players.entity.contact import Contact
 
 
 class Player():

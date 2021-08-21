@@ -1,20 +1,17 @@
 import requests
-
 from bson import ObjectId
 from flask import request
 from flask.blueprints import Blueprint
 
-from business.shared.api_return import ApiReturn
-
-from business.users.entity.user import User
-from business.users.entity.user_auth import UserAuth
-
-from business.users.control.user_repository import UserRepository
+from src.business.users.control.user_repository import UserRepository
+from src.business.users.entity.user import User
+from src.business.users.entity.user_auth import UserAuth
+from src.shared.api_return import ApiReturn
 
 userController = Blueprint('user_controller', __name__, url_prefix='/users')
 
 
-class UserController():
+class UserController:
 
     @userController.route('/csgo')
     def test():
@@ -28,7 +25,7 @@ class UserController():
         payload = request.json
 
         if not 'login' in payload.keys():
-            return ApiReturn.error('Login obrigatória'), 400
+            return ApiReturn.error('Login obrigatório'), 400
 
         if not 'password' in payload.keys():
             return ApiReturn.error('Senha obrigatória'), 400
@@ -60,7 +57,7 @@ class UserController():
 
     @userController.get('/<id>')
     def findById(id):
-        if ObjectId.is_valid(id) == False:
+        if not ObjectId.is_valid(id):
             return ApiReturn.error('Id inválido'), 400
 
         auth_header = request.headers.get('Authorization')

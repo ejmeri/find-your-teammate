@@ -36,7 +36,7 @@ class PlayerController():
         try:
             userAuth = UserAuth.decode_auth_token(auth_token)
         except RuntimeError as error:
-            return ApiReturn.error('Acesso negado', error), 401            
+            return ApiReturn.error('Acesso negado', str(error)), 401            
 
         if not userAuth['user_id']:
             return ApiReturn.error('Erro na sessão logada, por favor, faça login novamente'), 400
@@ -69,7 +69,7 @@ class PlayerController():
         try:
             userAuth = UserAuth.decode_auth_token(auth_token)
         except RuntimeError as error:
-            return ApiReturn.error('Acesso negado', error), 401            
+            return ApiReturn.error('Acesso negado', str(error)), 401            
 
         if not userAuth['user_id']:
             return ApiReturn.error('Erro na sessão logada, por favor, faça login novamente'), 400

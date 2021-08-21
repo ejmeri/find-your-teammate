@@ -10,7 +10,7 @@ class Player():
     def __init__(self, userId, name, about, country, steamUser, mainPosition, positions, inGameLeader) -> None:
         self._id = ObjectId()
         self.userId = userId
-        self.name = name
+        self.name: str = name
         self.about: str = about
         self.country: str = country
         self.active: bool = True

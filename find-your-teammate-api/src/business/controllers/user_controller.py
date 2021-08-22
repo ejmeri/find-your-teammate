@@ -1,3 +1,4 @@
+from src.business.users.entity.user_new import UserNew
 import requests
 from bson import ObjectId
 from flask import request
@@ -20,7 +21,7 @@ class UserController:
 
         return response.toJson()
 
-    @userController.post('')
+    @userController.post('/new')
     def create():
         payload = request.json
 
@@ -31,14 +32,18 @@ class UserController:
             return ApiReturn.error('Senha obrigatória'), 400
 
         try:
-            user = User(**payload)
+            userNew = UserNew(**payload)
+            if not userNew.validate:
+                return ApiReturn.error('Erro durante o processamento'), 400
+
         except Exception as error:
             return ApiReturn.error('Erro durante o processamento', str(error)), 500
 
-        userExist = UserRepository.findByLogin(user.login)
+        userExist = UserRepository.findByLogin(userNew.login)
         if userExist:
             return ApiReturn.error('Login já cadastrado'), 400
 
+        user = User(userNew.login, userNew.password)
         user.hashPassword()
         UserRepository.create(user.toCreateJson())
 

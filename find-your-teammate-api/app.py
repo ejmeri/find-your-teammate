@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_cors import CORS
 
 from extensions import mongo
 from test import simple_page
@@ -13,6 +14,7 @@ from src.business.controllers.player_stats_controller import playerStatsControll
 
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config.from_object('settings')
 app.config['JWT_TOKEN'] = os.getenv('SECRET_KEY')

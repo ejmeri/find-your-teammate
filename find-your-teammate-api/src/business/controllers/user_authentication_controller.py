@@ -8,7 +8,7 @@ from src.business.users.entity.user_auth import UserAuth
 from src.business.users.control.user_repository import UserRepository
 
 userAuthenticationController = Blueprint(
-    'user_authentication_controller', __name__, url_prefix='/users/authentication')
+    'user_authentication_controller', __name__, url_prefix='/authentication')
 
 
 class UserAuthenticationController:

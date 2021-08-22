@@ -12,11 +12,12 @@ class PlayerStatsService:
         stats = requests.get(
             url, headers={'TRN-Api-Key': os.getenv('TRACKER_TOKEN')})
 
-        print(url, ' url')
+        print(str(stats))
+        
         if stats.status_code is 200:
-            return ApiReturn.success(response=stats.json()), 200
+            return stats.json()
         else:
-            return ApiReturn.error('Não foi possível carregas as estatísticas', str(stats)), 200
+            return ApiReturn.error('Não foi possível carregas as estatísticas', str(stats))
 
     @staticmethod
     def findWeaponsStatus(steamId: str):

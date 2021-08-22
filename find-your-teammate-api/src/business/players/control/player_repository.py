@@ -9,5 +9,8 @@ class PlayerRepository():
     def findByUserId(userId):
         return mongo.db.players.find_one({ 'userId': ObjectId(userId) })
 
+    def updateInfo(playerId,avatarProfileImage, stats):
+        return mongo.db.players.update_one({'_id': ObjectId(playerId)}, { '$set': {  'avatarProfileImage': avatarProfileImage, 'stats': stats } })
+
     def find():
         return mongo.db.players.find({ 'active': True })

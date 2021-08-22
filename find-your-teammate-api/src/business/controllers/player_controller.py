@@ -3,7 +3,7 @@ from flask.blueprints import Blueprint
 from flask import request
 
 from src.shared.api_return import ApiReturn
-from src.business.players.control.player_info_repository import PlayerRepository
+from src.business.players.control.player_repository import PlayerRepository
 
 from src.business.users.entity.user_auth import UserAuth
 from src.business.players.entity.player_info import Player

@@ -7,7 +7,7 @@ from src.business.players.entity.contact import Contact
 
 class Player():
 
-    def __init__(self, userId, name, about, country, gcLevel, gcLink, steamUserId, mainPosition, positions, inGameLeader) -> None:
+    def __init__(self, userId, name, rank, steamUserId, avatarProfileImage = None, about = None, country = None, gcLevel = None, gcLink = None, mainPosition = None, positions = [], inGameLeader = False):
         self._id = ObjectId()
         self.userId = userId
         self.name: str = name
@@ -22,8 +22,10 @@ class Player():
         self.steamUserUrl: str = None
         self.mainPosition: str = mainPosition
         self.positions: list = positions
+        self.rank: str = rank
         self.inGameLeader: bool = inGameLeader
         self.createDate: datetime = datetime.utcnow()
+        self.avatarProfileImage = avatarProfileImage
 
     def buildSteamUrl(self):
         self.steamUserUrl = 'https://steamcommunity.com/profiles/' + self.steamUserId
@@ -33,6 +35,7 @@ class Player():
             '_id': self._id,
             'userId': ObjectId(self.userId),
             'name': self.name,
+            'rank': self.rank,
             'about': self.about,
             'createDate': self.createDate,
             'country': self.country,

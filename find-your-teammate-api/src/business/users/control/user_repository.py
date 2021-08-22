@@ -13,4 +13,4 @@ class UserRepository():
         return mongo.db.users.find()
 
     def create(user):
-        mongo.db.users.insert_one(user)
+        return mongo.db.users.insert_one(user)

@@ -1,13 +1,15 @@
-from src.business.users.entity.user_new import UserNew
+from src.business.users.control.user_service import UserService
 import requests
 from bson import ObjectId
 from flask import request
 from flask.blueprints import Blueprint
 
+from src.shared.api_return import ApiReturn
+
 from src.business.users.control.user_repository import UserRepository
+
 from src.business.users.entity.user import User
 from src.business.users.entity.user_auth import UserAuth
-from src.shared.api_return import ApiReturn
 
 userController = Blueprint('user_controller', __name__, url_prefix='/users')
 
@@ -31,23 +33,7 @@ class UserController:
         if not 'password' in payload.keys():
             return ApiReturn.error('Senha obrigatória'), 400
 
-        try:
-            userNew = UserNew(**payload)
-            if not userNew.validate:
-                return ApiReturn.error('Erro durante o processamento'), 400
-
-        except Exception as error:
-            return ApiReturn.error('Erro durante o processamento', str(error)), 500
-
-        userExist = UserRepository.findByLogin(userNew.login)
-        if userExist:
-            return ApiReturn.error('Login já cadastrado'), 400
-
-        user = User(userNew.login, userNew.password)
-        user.hashPassword()
-        UserRepository.create(user.toCreateJson())
-
-        return ApiReturn.success('Usuário salvo com sucesso', str(user._id)), 201
+        return UserService.createUser(payload)
 
     @userController.get('')
     def findAll():

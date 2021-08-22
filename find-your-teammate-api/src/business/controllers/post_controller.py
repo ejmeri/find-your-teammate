@@ -45,7 +45,6 @@ class PostController():
             return ApiReturn.error('Identificação do post inválida'), 400
 
         payload = request.json
-        print(request.json, ' ', id, ' jsonnnnnnnnnnnn')
 
         if not 'content' in payload.keys():
             return ApiReturn.error('Conteúdo do comentário é obrigatório'), 400

@@ -7,7 +7,7 @@ from src.business.players.entity.contact import Contact
 
 class Player():
 
-    def __init__(self, userId, name, about, country, steamUser, mainPosition, positions, inGameLeader) -> None:
+    def __init__(self, userId, name, about, country, gcLevel, gcLink, steamUserId, mainPosition, positions, inGameLeader) -> None:
         self._id = ObjectId()
         self.userId = userId
         self.name: str = name
@@ -16,7 +16,9 @@ class Player():
         self.active: bool = True
         self.available: bool = True
         self.contact: Contact = None
-        self.steamUserId: str = steamUser
+        self.gcLevel =  gcLevel
+        self.gcLink: str = gcLink
+        self.steamUserId: str = steamUserId
         self.steamUserUrl: str = None
         self.mainPosition: str = mainPosition
         self.positions: list = positions

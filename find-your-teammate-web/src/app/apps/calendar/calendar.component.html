@@ -1,0 +1,49 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="header container-fluid">
+            <div class="row">
+              <div class="col-md-10">
+                <h4>Calendar</h4>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <!-- <div class="col-md-2 col-sm-12 p-l-30">
+                <div class="m-b-25">
+                  <button mat-raised-button color="primary" (click)="addNewEvent()">Add Event</button>
+                </div>
+                <h5>My Calendars</h5>
+                <div class="filter-container">
+                  <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+                    <mat-radio-button class="example-radio-button ml-0 filter" *ngFor="let filter of filters"
+                      [value]="filter.name" [checked]="filter.checked ==='true'" (change)="changeCategory($event)">
+                      {{filter.value}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div> -->
+              <div class="col-lg-10 col-lg-12">
+                <div class="panel-body">
+                  <!-- editable="true" -->
+                  <full-calendar #calendar [height]="'auto'" locale="pt-br"  defaultDate="2018-06-01" defaultView="dayGridMonth"
+                    [buttonText]="buttonText" [header]="{
+                                          left: 'prev,next today',
+                                          center: 'title',
+                                          right: 'dayGridMonth,dayGridWeek,dayGridDay,listWeek'  
+                                        }" [plugins]="calendarPlugins" [weekends]="calendarWeekends"
+                    (eventRender)="handleEventRender($event)" (eventClick)="eventClick($event)"
+                    [events]="calendarEvents" (dateClick)="addNewEvent($event)">
+                  </full-calendar>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+<ng-select [style.padding-bottom]="handleBottom"
+    [(ngModel)]="value"
+    [id]="dropdownId"
+    dropdownPosition="bottom"
+    bindValue="id"
+    bindLabel="text"
+    [disabled]="disabled"
+    [notFoundText]="emptyMessage"
+    [loading]="loading"
+    [loadingText]="loadingText"
+    [items]="items"
+    [multiple]="multiple"
+    [virtualScroll]="scroll"
+    [searchable]="searchable"
+    [appearance]="appearance"
+    [placeholder]="handlePlaceholder"
+    (blur)="onBlur()"
+    (change)="refreshItems($event)">
+</ng-select>
+<ng-content style="margin-top: -10px;"></ng-content>
+<!-- appendTo="body" -->
+<!--
+<mat-form-field class="example-full-width" [appearance]="appearance" style="display: inline;">
+  <mat-label>{{ placeholder }}</mat-label>
+  <mat-select
+    appendTo="body"
+    disableOptionCentering="true"
+    [id]="dropdownId"
+    [multiple]="multiple"
+    [(ngModel)]="value"
+    [placeholder]="placeholder"
+    (selectionChange)="onSelectEvent($event)">
+    <mat-option selected="true" value="" *ngIf="showOptionAll">Todos</mat-option>
+    <mat-option *ngFor="let item of items" [value]="item.id">
+      {{ item.text }}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->

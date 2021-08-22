@@ -1,0 +1,70 @@
+.menublock .active .menublock-item .medium-box {
+  border-color: #594ae1;
+  box-shadow: 0px 0 3px 2px #0c4489;
+  // -webkit-box-shadow: 0px 0px 3px #4952a1;
+  .text-cia {
+    color: #61c2cb;
+  }
+  .text-cia:hover {
+    color: #0c4489;
+  }
+}
+
+.mat-expansion-panel-body {
+  padding: 24px 16px 8px;
+}
+// .medium-box:hover {
+//   background-color:#0c4489;
+//   .text-cia {
+//     color: #FFF;
+//   }
+//   .text-cia:hover {
+//     color: #FFF;
+//   }
+// }
+
+.text-cia {
+  color: #0c4489;
+}
+
+.text-cia:hover {
+  color: #61c2cb;
+}
+
+.text-cia:active {
+  color: #61c2cb;
+}
+
+*:focus {
+  outline: 0 !important;
+  caret-color: black;
+}
+
+.cke_contents {
+  caret-color: black;
+}
+
+.header-feature {
+  padding: 12px;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #61c2cb;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #0c4489;
+}
+
+.washere {
+  background-color: #ffc461;
+}
+
+.angular-editor-textarea {
+  caret-color: black;
+}
+
+.centered-content {
+  margin-left: 30px;
+  margin-right: 150px;
+}

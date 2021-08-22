@@ -1,0 +1,19 @@
+.everybody-looks-to-the-right {
+    margin-right: 10px;
+}
+
+.everybody-looks-to-the-left {
+    margin-left: 10px;
+}
+
+.give-me-some-space-bitch {
+    margin: 10px;
+}
+
+@media screen and (max-width: 699px) {
+    .btn-responsive {
+      display: block;
+      width: 100%;
+      margin-top: 1em;
+    }
+}

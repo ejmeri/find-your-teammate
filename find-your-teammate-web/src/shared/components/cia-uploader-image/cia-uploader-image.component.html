@@ -1,0 +1,29 @@
+<cia-dialog #dialog></cia-dialog>
+<cia-form-row>
+    <div class="col-lg-12">
+        <div class="pull-left">
+            <label>{{ label }}</label>
+            <cia-file-upload [name]="attrName" [label]="label" [images]="true" (oncomplete)="onComplete($event)"
+                #ciaUploaderImage>
+            </cia-file-upload>
+        </div>
+
+        <div class="pull-right">
+            <cia-spinner-button type="button" marginTop="26px" marginRight="0px"
+                *ngIf="ciaUploaderImage.hasSelectedFile()" color="primary" text="Upload do arquivo" icon="file_upload"
+                pull="right" [loading]="uploading" loadingText="Salvando arquivo..." (click)="sendFile()">
+            </cia-spinner-button>
+        </div>
+    </div>
+</cia-form-row>
+
+<cia-form-row>
+    <div class="col-lg-12 text-center">
+        <div class="exercise-img" *ngIf="imageUrl">
+            <div>
+                <img defaultImage="https://ipolitecnicobahia.org/wp-content/themes/remould/images/noimage.png"
+                    [lazyLoad]="imageUrl" title="Imagem do arquivo" style="max-height:100%;" />
+            </div>
+        </div>
+    </div>
+</cia-form-row>

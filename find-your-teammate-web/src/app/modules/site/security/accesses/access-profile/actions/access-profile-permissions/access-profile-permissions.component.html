@@ -1,0 +1,524 @@
+<div *ngIf="userAdminProfileId">
+  <cia-card subtitle="Permissões">
+    <cia-dialog #dialog></cia-dialog>
+    <cia-spinner [overlay]="true" [show]="loadingPermissions"></cia-spinner>
+    <mat-accordion class="example-headers-align">
+
+      <cia-card subtitle="Empresas" intern="true">
+        <cia-expansion-panel title="Clientes" subtitle="Módulo de Clientes" icon="industry">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.companies" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.companies" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.companies" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.companies" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Colaboradores" subtitle="Módulo de Colaboradores" icon="users">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.collaborators" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.collaborators" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.collaborators" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.collaborators" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Planejamentos" subtitle="Módulo de Planejamentos" icon="map">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.companyPlannings" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.companyPlannings" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.companyPlannings" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.companyPlannings" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Gestão de Turmas" subtitle="Módulo de Turmas" icon="users">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.companyTeams" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.companyTeams" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.companyTeams" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.companyTeams" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Gestão de Aulas" subtitle="Módulo de Aulas" icon="chalkboard-teacher">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.realizationClasses" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.realizationClasses" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.realizationClasses" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.realizationClasses" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Questionários" subtitle="Módulo de Questionários" icon="book">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.companyQuestionnaires" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.companyQuestionnaires" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.companyQuestionnaires" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.companyQuestionnaires" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Atribuições" subtitle="Módulo de Questionários" icon="link">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.companyQuestionnaireAllocations"
+                class="example-list" (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.companyQuestionnaireAllocations"
+                  cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.companyQuestionnaireAllocations" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.companyQuestionnaireAllocations" cdkDrag>
+                  {{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Respostas" subtitle="Módulo de Questionários" icon="pencil-alt">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.companyQuestionnaireAnswers" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.companyQuestionnaireAnswers" cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.companyQuestionnaireAnswers" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.companyQuestionnaireAnswers" cdkDrag>
+                  {{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Ramo de Atividades" subtitle="Módulo de Configurações" icon="cogs">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.segments" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.segments" cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.segments" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.segments" cdkDrag>
+                  {{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Setores" subtitle="Módulo de Configurações" icon="cogs">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.sectors" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.sectors" cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.sectors" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.sectors" cdkDrag>
+                  {{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Departamentos" subtitle="Módulo de Configurações" icon="cogs">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.departments" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.departments" cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.departments" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.departments" cdkDrag>
+                  {{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+      </cia-card>
+
+      <cia-card title="Planejamentos" intern="true">
+        <cia-expansion-panel title="Planejamentos" subtitle="Módulo de Elaboração" icon="map">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.plannings" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.plannings" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.plannings" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.plannings" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Aulas" subtitle="Módulo de Elaboração" icon="chalkboard-teacher">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.classes" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.classes" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.classes" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.classes" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Exercícios" subtitle="Módulo de Elaboração" icon="walking">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.exercises" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.exercises" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.exercises" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.exercises" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Ênfases" subtitle="Módulo de Configurações" icon="cogs">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.planningSettingsEmphases" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.planningSettingsEmphases" cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.planningSettingsEmphases" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.planningSettingsEmphases" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Objetivos" subtitle="Módulo de Configurações" icon="cogs">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.planningSettingsObjectives" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.planningSettingsObjectives" cdkDrag>
+                  {{item}}</div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.planningSettingsObjectives" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.planningSettingsObjectives" cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Regiões" subtitle="Módulo de Configurações" icon="cogs">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.planningSettingsRegions" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.planningSettingsRegions" cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.planningSettingsRegions" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.planningSettingsRegions" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Articulações" subtitle="Módulo de Configurações" icon="cogs">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.planningSettingsJoints" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.planningSettingsJoints" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.planningSettingsJoints" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.planningSettingsJoints" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Músculos" subtitle="Módulo de Configurações" icon="cogs">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.planningSettingsMuscles" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.planningSettingsMuscles" cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.planningSettingsMuscles" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.planningSettingsMuscles" cdkDrag>{{item}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+
+        <cia-expansion-panel title="Materiais" subtitle="Módulo de Configurações" icon="cogs">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.planningSettingsMaterials" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.planningSettingsMaterials" cdkDrag>
+                  {{item}}</div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.planningSettingsMaterials" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.planningSettingsMaterials" cdkDrag>
+                  {{item}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+      </cia-card>
+
+      <cia-card title="Professores" intern="true">
+        <cia-expansion-panel title="Professores" subtitle="Módulo de Professores" icon="users">
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <h5>Permissões</h5>
+
+              <div cdkDropList [cdkDropListData]="profilePermissions.teachers" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of profilePermissions.teachers" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <h5>Permitido <i class="fas fa-check-circle text-success"></i></h5>
+
+              <div cdkDropList [cdkDropListData]="allowPermissions.teachers" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of allowPermissions.teachers" cdkDrag>{{item}}</div>
+              </div>
+            </div>
+          </div>
+        </cia-expansion-panel>
+      </cia-card>
+    </mat-accordion>
+  </cia-card>
+
+  <cia-card>
+    <div class="col-lg-12">
+      <div class="pull-right">
+        <cia-spinner-button icon="save" text="Salvar Permissões" (click)="onRegisterPermissions()" color="primary"
+          loadingText="Processando..." [loading]="loadingPermissions"></cia-spinner-button>
+      </div>
+    </div>
+  </cia-card>
+</div>

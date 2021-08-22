@@ -1,0 +1,18 @@
+<!-- [class]="className" -->
+
+<button
+    [type]="type"
+    [class]="className" 
+    [disabled]="disabled || loading"
+    [style.height]="height"
+    [style.margin-right]="marginRight"
+    [style.margin-left]="marginLeft" 
+    [style.margin-bottom]="marginBottom" 
+    [style.margin-top]="marginTop">
+    <span class="mat-button-wrapper">
+        <mat-icon *ngIf="!hideIcon" [style.margin-left]="iconMargin">{{ currentIcon }} </mat-icon> 
+        <!-- <i [class]="currentIcon" [hidden]="hideIcon" [style.margin-left]="iconMargin"></i> -->
+        <i [hidden]="!show" class="fas fa-redo-alt fa-spin fa-fw fa-1x spinner" aria-hidden="true"></i>
+    </span>
+    {{ currentText }}
+</button>

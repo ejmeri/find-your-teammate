@@ -1,0 +1,54 @@
+<cia-dialog #dialog></cia-dialog>
+<cia-spinner [overlay]="true" [show]="loading"></cia-spinner>
+
+
+<cia-card subtitle="Filtros" first="true">
+  <cia-form-row>
+    <div class="col-lg-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput placeholder="Administrador" [(ngModel)]="params.name" />
+      </mat-form-field>
+    </div>
+    <div class="col-lg-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="params.active">
+          <mat-option value="">Todos</mat-option>
+          <mat-option value="true">Ativos</mat-option>
+          <mat-option value="false">Inativos</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </cia-form-row>
+  <cia-form-row>
+    <div class="col-lg-12">
+      <div class="pull-left">
+        <button mat-raised-button (click)="refresh()">
+          <mat-icon>clear</mat-icon> Limpar
+        </button>
+      </div>
+      <div class="pull-right">
+        <button mat-raised-button color="primary" (click)="findUsersAdminProfile()">
+          <mat-icon>search</mat-icon> Pesquisar
+        </button>
+      </div>
+    </div>
+  </cia-form-row>
+</cia-card>
+
+<cia-card subtitle="Perfis Cadastrados">
+
+  <cia-grid
+    [rows]="usersAdminProfiles"
+    [columns]="['Nome', 'Data de Criação']"
+    [fields]="['name', 'formattedCreateDate']"
+    [loading]="searching"
+    showActive="true"
+    showEdit="true"
+    (onEdit)="detailsUserAdminProfile($event)"
+    showInactive="true"
+    (onInactive)="inactiveUserAdminProfile($event)"
+    showActiveEvent="true">
+  </cia-grid>
+</cia-card>

@@ -1,0 +1,107 @@
+@import 'app/variables';
+
+// UTILITARIAS
+@import 'app/utils.scss';
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0;
+  // overflow: visible;
+}
+
+.exercise-img {
+  // height: 400px;
+  margin: auto;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.online-video {
+  margin: auto;
+  width: 700px;
+}
+
+.ng-select .ng-select-container.ng-appearance-outline {
+  margin-top: -5px;
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
+.ng-select .ng-select-container:hover {
+  cursor: pointer;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  margin-top: 0px;
+}
+
+.ng-select div,
+.ng-select input,
+.ng-select span {
+  margin-top: 3px;
+  font-size: medium;
+}
+
+.mat-tab-label {
+  background-color: rgb(211, 211, 211);
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.mat-tab-label-active {
+  color: #000;
+  font-weight: bold;
+  background-color: #fff;
+  // border-color: #dee2e6 #dee2e6 #fff rgba(0, 0, 0, 0.12);
+  border-bottom: 3px solid #0c4489;
+  opacity: 1 !important;
+}
+
+.mat-tab-label {
+  border-color: 0;
+}
+
+.mat-ink-bar {
+  display: none;
+}
+
+.mat-tab-nav-bar,
+.mat-tab-header {
+  border-bottom: 0px;
+}
+
+.header-feature {
+  padding: 12px;
+}
+
+.mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-thumb {
+  background-color: #0c4489;
+}
+
+.mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar {
+  background-color: #61c2cb;
+}
+
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  background-color: #0c4489;
+}
+
+.mat-accordion .cia-expasion-panel .mat-expansion-panel:not(.mat-expanded),
+.mat-accordion .cia-expasion-panel .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+  border-radius: 0;
+}
+
+
+.mat-input-element {
+  caret-color: #000;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value  {
+  background-color: #0c4489;
+  border-radius: 7px;
+}

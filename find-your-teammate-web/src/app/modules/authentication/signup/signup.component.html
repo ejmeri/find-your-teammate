@@ -1,0 +1,63 @@
+<cia-dialog #dialog></cia-dialog>
+
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100" 
+      style="
+        background-image: url('assets/images/pages/bg-li.jpeg');  
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;"
+    >
+    <div class="wrap-login100">
+
+      <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <span class="login100-form-title p-b-30">
+          Novo cadastro
+        </span>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Login</mat-label>
+          <input matInput formControlName="login" required>
+          <mat-icon matSuffix>face</mat-icon>
+          <mat-error *ngIf="loginForm.get('login').hasError('required')">
+            Nome de usuário obrigatório
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="loginForm.get('password').hasError('required')">
+            Senha é obrigatória
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Confirmar senha</mat-label>
+          <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'" required>
+          <mat-icon matSuffix (click)="chide = !chide">
+            {{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="loginForm.get('cpassword').hasError('required')">
+            Confirme sua senha
+          </mat-error>
+        </mat-form-field>
+        <div class="flex-sb-m w-full p-t-15 p-b-20">
+          <div>
+            <span>Já possui cadastro? <a routerLink="/login">
+                Login
+              </a></span>
+          </div>
+        </div>
+        <div class="container-login100-form-btn">
+          <cia-spinner-button type="submit" icon="send" color="primary" [loading]="loading" text="Cadastrar"
+            loadingText="Efetuando cadastro..." title="Cadastrar">
+          </cia-spinner-button>
+        </div>
+      </form>
+      <div class="login100-more">
+        <button mat-raised-button></button>
+      </div>
+    </div>
+  </div>
+</div>

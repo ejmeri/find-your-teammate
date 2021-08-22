@@ -1,0 +1,11 @@
+<div [class]="classes">
+    <div *ngIf="title || subtitle">
+        <div class="header">
+            <span class="font-32">{{ title }} </span>  <span class="font-16"> {{ subtitle }}</span>
+        </div>
+        <mat-divider *ngIf="divider"></mat-divider>
+    </div>
+    <div class="body">
+        <ng-content></ng-content>
+    </div>
+</div>

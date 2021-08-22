@@ -1,0 +1,84 @@
+.menublock-item {
+  margin-top: 1em;
+}
+
+a {
+  cursor: pointer;
+}
+
+a em {
+  display: block;
+  text-decoration: none;
+}
+
+.item-text {
+  display: block;
+  padding-top: 5px;
+  height: 37px;
+  line-height: 1.23em;
+  // font-weight: bold;
+}
+
+.item-text:active {
+  color: #61c2cb;
+}
+
+.sm .item-text {
+  font-size: 20px;
+}
+
+.small-box,
+.medium-box,
+.large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  margin-right: 22px;
+  margin-bottom: 2px;
+  padding: 5px;
+  border-radius: 8px;
+  font-size: medium;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.small-box {
+  height: 100px;
+  width: 100px;
+}
+
+.medium-box {
+  height: 120px;
+  width: 165px;
+}
+
+.large-box {
+  height: 300px;
+  width: 300px;
+}
+
+@media (max-width: 575px) {
+  .medium-box {
+    width: 150px;
+  }
+}
+
+@media (max-width: 375px) {
+  .medium-box {
+    width: 150px;
+    margin-right: 2px;
+  }
+}
+
+.text-cia {
+  color: #0c4489;
+}
+
+.text-cia:hover {
+  color: #61c2cb;
+}
+
+.text-cia:active {
+  color: #61c2cb;
+}

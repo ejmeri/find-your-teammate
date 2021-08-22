@@ -1,0 +1,71 @@
+<cia-form-row>
+  <div *ngIf="loading" class="loading">
+    <i class="fas fa-redo-alt fa-spin fa-fw fa-4x spinner"></i>
+  </div>
+  <div class="body table-responsive">
+    <table class="table table-borderless table-hover">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns">{{ column }}</th>
+          <th width="110px" *ngIf="showActive">{{ activeHeaderText }}</th>
+          <th width="120px" class="text-center" *ngIf="showActions">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of rows">
+          <td *ngFor="let field of fields" [innerHTML]="getFieldValue(row, field)"></td>
+          <td *ngIf="showActive" [innerHTML]="renderActive(row)"></td>
+          <td *ngIf="showActions" class="text-center">
+
+            <button mat-icon-button title="Editar" color="" *ngIf="showEdit" (click)="onEditButton(row)">
+              <mat-icon title="Editar" class="grid-edit">mode_edit</mat-icon>
+            </button>
+            <button mat-icon-button title="Visualizar" color="" *ngIf="showDetail" (click)="onDetailButton(row)">
+              <mat-icon title="Visualizar" class="grid-edit">remove_red_eye</mat-icon>
+            </button>
+            <button mat-icon-button [title]="customTitle" [color]="colorCustom" *ngIf="showCustom" (click)="onCustomButton(row)">
+              <mat-icon [title]="customTitle">{{ renderCustomIcon }}</mat-icon>
+            </button>
+
+            <button mat-icon-button title="Excluir" *ngIf="showDelete" class="grid-remove" color="warn" (click)="onDeleteButton(row)">
+              <mat-icon title="Excluir">clear</mat-icon>
+            </button>
+
+            <button mat-icon-button  title="Inativar" *ngIf="row.active && showInactive" color="warn" (click)="onInactiveButton(row)">
+              <mat-icon title="Inativar">lock_outline</mat-icon>
+            </button>
+
+            <button mat-icon-button title="Ativar" *ngIf="!row.active && showActiveEvent" color="">
+              <mat-icon title="Ativar" style="color:#2b982b;">lock_open</mat-icon>
+            </button>
+
+            <!-- <button type="button" *ngIf="showDelete" title="Excluir" [tooltip]="renderDeleteTooltip"
+							class="btn btn-danger btn-sm grid-remove" (click)="onDeleteButton(row)">
+							<i title="Excluir" class="fa fa-times"></i>
+            </button> -->
+
+          </td>
+        </tr>
+
+        <tr *ngIf="!hasRows">
+          <td [attr.colspan]="numCols" class="text-center">{{emptyMessage}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</cia-form-row>
+<cia-form-row *ngIf="showPagination">
+  <div class="col-lg-12">
+    <div *ngIf="showTotalPages"><span class="text-bold">Total de itens encontrados: {{ _totalRecords }}</span></div>
+  </div>
+  <div class="col-lg-12">
+    <div class="pull-right">
+      <button (click)="onPrevious()" class="btn btn-default" [disabled]="currentPage === 1" style="margin-right: 20px;">
+        Anterior</button>
+      <span>{{ renderPaginationText }}</span>
+      <button (click)="onNext()" class="btn btn-default"
+        [disabled]="currentPage === totalPages || (rows && rows.length < _pageSize)" style="margin-left: 20px;">Próximo
+      </button>
+    </div>
+  </div>
+</cia-form-row>

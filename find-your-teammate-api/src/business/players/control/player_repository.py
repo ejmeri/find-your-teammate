@@ -7,10 +7,14 @@ class PlayerRepository():
         mongo.db.players.insert_one(player)
 
     def findByUserId(userId):
-        return mongo.db.players.find_one({ 'userId': ObjectId(userId) })
+        return mongo.db.players.find_one({'userId': ObjectId(userId)})
 
-    def updateInfo(playerId,avatarProfileImage, stats):
-        return mongo.db.players.update_one({'_id': ObjectId(playerId)}, { '$set': {  'avatarProfileImage': avatarProfileImage, 'stats': stats } })
+    def updateInfo(playerId, avatarProfileImage, stats):
+        return mongo.db.players.update_one({'_id': ObjectId(playerId)}, {'$set': {'avatarProfileImage': avatarProfileImage, 'stats': stats}})
 
     def find():
-        return mongo.db.players.find({ 'active': True })
+        return mongo.db.players.find({'active': True})
+
+    def update(player):
+        return mongo.db.players.update_one(
+            {'userId': ObjectId(player.userId)}, {'$set': {'name': player.name, 'rank': player.rank, 'gcLevel': player.gcLevel, 'gcLink': player.gcLink, 'about': player.about, 'avatarProfileImage': player.avatarProfileImage, 'stats': player.stats}})

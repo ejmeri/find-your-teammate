@@ -27,7 +27,11 @@ class PlayerStatsController:
         if isinstance(auth_user, ApiReturn):
             return auth_user
 
-        return PlayerStatsService.findPersonalStats(steamId)
+        statsPersonal = PlayerStatsService.findPersonalStats(steamId)
+        if 'internalError' in statsPersonal.keys():
+            return ApiReturn.success("Erro durante atualizaçaõ do perfil. Mantenha seu perfil na steam público", str(statsPersonal)), 400
+
+        return ApiReturn.success(response=statsPersonal), 200
 
     @playerStatsController.get('/weapons')
     def findWeaponStats(id, steamId: str):

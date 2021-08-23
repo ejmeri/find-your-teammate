@@ -59,7 +59,6 @@ class UserController:
 
         try:
             resp = UserAuth.decode_auth_token(auth_token)
-            print(resp)
         except RuntimeError as error:
             return ApiReturn.error('Acesso negado', str(error)), 401
 

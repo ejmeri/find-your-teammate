@@ -40,7 +40,7 @@ class UserService:
         statsPersonal = PlayerStatsService.findPersonalStats(
             player.steamUserId)
         if 'internalError' in statsPersonal.keys():
-            return ApiReturn.success("Usuário salvo com sucesso, porém sem estatísticas salvas. Mantenha seu perfil público", str(statsPersonal)), 400
+            return ApiReturn.success("Usuário salvo com sucesso, porém sem estatísticas salvas. Mantenha seu perfil na steam público", str(statsPersonal)), 400
 
         avatarProfileImage = statsPersonal['data']['platformInfo']['avatarUrl']
         stats = {

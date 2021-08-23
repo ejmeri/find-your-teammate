@@ -16,7 +16,7 @@ class PlayerRepository():
         return mongo.db.players.find({'active': True, 'available': True, })
 
     def findPlayers(search):
-        return mongo.db.players.find({'rank': search})
+        return mongo.db.players.find({'rank': search, 'stats.kills': { '$exists': 'true' } })
 
     def update(player):
         return mongo.db.players.update_one(

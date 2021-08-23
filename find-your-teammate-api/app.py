@@ -4,8 +4,8 @@ from flask import Flask
 from flask_cors import CORS
 
 from extensions import mongo
-from test import simple_page
 
+from ping import utilController
 from src.business.controllers.user_controller import userController
 from src.business.controllers.user_authentication_controller import userAuthenticationController
 from src.business.controllers.player_controller import playerController
@@ -24,7 +24,7 @@ app.config['TRACKER_TOKEN'] = os.getenv('TRACKER_TOKEN')
 
 mongo.init_app(app)
 
-app.register_blueprint(simple_page)
+app.register_blueprint(utilController)
 app.register_blueprint(userController)
 app.register_blueprint(userAuthenticationController)
 app.register_blueprint(playerController)

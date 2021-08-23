@@ -33,13 +33,10 @@ class Player():
             'rank': self.rank,
             'about': self.about,
             'createDate': self.createDate,
-            'country': self.country,
             'active': self.active,
             'available': self.available,
             'steamUserId': self.steamUserId,
             'steamUserUrl': self.steamUserUrl,
-            'mainPosition': self.mainPosition,
-            'positions': self.positions,
             'inGameLeader': self.inGameLeader,
             'createDate': self.createDate,
         }

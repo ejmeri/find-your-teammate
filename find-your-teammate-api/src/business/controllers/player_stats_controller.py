@@ -24,8 +24,8 @@ class PlayerStatsController:
 
         auth_user = ExtractJwtPayload.extract(
             request.headers.get('Authorization'))
-        if isinstance(auth_user, ApiReturn):
-            return auth_user
+        if 'internalError' in auth_user.keys():
+            return auth_user, 401
 
         statsPersonal = PlayerStatsService.findPersonalStats(steamId)
         if 'internalError' in statsPersonal.keys():
@@ -43,8 +43,8 @@ class PlayerStatsController:
 
         auth_user = ExtractJwtPayload.extract(
             request.headers.get('Authorization'))
-        if isinstance(auth_user, ApiReturn):
-            return auth_user
+        if 'internalError' in auth_user.keys():
+            return auth_user, 401
 
         return PlayerStatsService.findWeaponsStats(steamId)
 
@@ -59,7 +59,7 @@ class PlayerStatsController:
 
         auth_user = ExtractJwtPayload.extract(
             request.headers.get('Authorization'))
-        if isinstance(auth_user, ApiReturn):
-            return auth_user
+        if 'internalError' in auth_user.keys():
+            return auth_user, 401
 
         return PlayerStatsService.findMapsStats(steamId)

@@ -50,8 +50,8 @@ class PostController():
             return ApiReturn.error('Conteúdo do comentário é obrigatório'), 400
 
         auth_user = ExtractJwtPayload.extract(request.headers.get('Authorization'))
-        if isinstance(auth_user, ApiReturn):
-            return auth_user 
+        if 'internalError' in auth_user.keys():
+            return auth_user, 401 
 
         payload['userId'] = auth_user['user_id']
         payload['userLogin'] = auth_user['login']
@@ -72,8 +72,8 @@ class PostController():
             return ApiReturn.error('Identificação do post inválida'), 400
 
         auth_user = ExtractJwtPayload.extract(request.headers.get('Authorization'))
-        if isinstance(auth_user, ApiReturn):
-            return auth_user
+        if 'internalError' in auth_user.keys():
+            return auth_user, 401
 
         commentsDb = PostRepository.findComments(id)
         if not commentsDb:

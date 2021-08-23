@@ -31,8 +31,8 @@ class PlayerController():
 
         auth_user = ExtractJwtPayload.extract(
             request.headers.get('Authorization'))
-        if isinstance(auth_user, ApiReturn):
-            return auth_user
+        if 'internalError' in auth_user.keys():
+            return auth_user, 401
 
         payload['userId'] = auth_user['user_id']
         try:
@@ -53,8 +53,8 @@ class PlayerController():
     @playerController.get('/info')
     def info():
         auth_user = ExtractJwtPayload.extract(request.headers.get('Authorization'))
-        if isinstance(auth_user, ApiReturn):
-            return auth_user
+        if 'internalError' in auth_user.keys():
+            return auth_user, 401
 
         player = PlayerRepository.findByUserId(auth_user['user_id'])
         if player:
@@ -68,8 +68,8 @@ class PlayerController():
     @playerController.put('')
     def updateProfile():
         auth_user = ExtractJwtPayload.extract(request.headers.get('Authorization'))
-        if isinstance(auth_user, ApiReturn):
-            return auth_user
+        if 'internalError' in auth_user.keys():
+            return auth_user, 401
 
         payload = request.json
 

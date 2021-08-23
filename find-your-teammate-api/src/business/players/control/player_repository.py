@@ -13,7 +13,10 @@ class PlayerRepository():
         return mongo.db.players.update_one({'_id': ObjectId(playerId)}, {'$set': {'avatarProfileImage': avatarProfileImage, 'stats': stats}})
 
     def find():
-        return mongo.db.players.find({'active': True})
+        return mongo.db.players.find({'active': True, 'available': True, })
+
+    def findPlayers(search):
+        return mongo.db.players.find({'rank': search})
 
     def update(player):
         return mongo.db.players.update_one(

@@ -9,7 +9,7 @@ class PlayerStatsService:
     def findPersonalStats(steamId: str):
         url_api: str = "https://public-api.tracker.gg/v2/csgo/standard/profile/steam/" + steamId
         stats = requests.get(
-            url_api, headers={'TRN-Api-Key': "OTKEN"})
+            url_api, headers={'TRN-Api-Key': "184f4bb3-d306-4906-a667-d9cb1c99c02d"})
 
         if stats.status_code is 200:
             return stats.json()
@@ -21,7 +21,7 @@ class PlayerStatsService:
         url_api: str = "https://public-api.tracker.gg/v2/csgo/standard/profile/steam/" + \
             steamId + '/segments/weapon'
         stats = requests.get(
-            url_api, headers={'TRN-Api-Key': "OTKEN"})
+            url_api, headers={'TRN-Api-Key': "184f4bb3-d306-4906-a667-d9cb1c99c02d"})
 
         if stats.status_code is 200:
             response = stats.json()
@@ -34,7 +34,7 @@ class PlayerStatsService:
         url_api: str = "https://public-api.tracker.gg/v2/csgo/standard/profile/steam/" + \
             steamId + str('/segments/map')
         stats = requests.get(
-            url_api, headers={'TRN-Api-Key': "OTKEN"})
+            url_api, headers={'TRN-Api-Key': "184f4bb3-d306-4906-a667-d9cb1c99c02d"})
 
         if stats.status_code is 200:
             response = stats.json()

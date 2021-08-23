@@ -7,8 +7,6 @@ export class Profile {
     private _acl: {};
 
     constructor(token: string, jwt: any) {
-        console.log(jwt);
-        
         this._token = token;
         this._user_id = jwt.user_id;
         this._login = jwt.name;

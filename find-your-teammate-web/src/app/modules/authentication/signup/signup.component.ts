@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
     hide = true;
     chide = true;
     loading: boolean;
+    profile_player: any = {}
 
     constructor(private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -31,7 +32,10 @@ export class SignupComponent implements OnInit {
         this.loginForm = this.formBuilder.group({
             login: ['', Validators.required],
             password: ['', Validators.required],
-            cpassword: ['', Validators.required]
+            cpassword: ['', Validators.required],
+            name: ['', Validators.required],
+            steamId: ['', Validators.required],
+            rank: ['', Validators.required]
         }, {
             validator: MustMatch('password', 'cpassword')
         });
@@ -61,7 +65,10 @@ export class SignupComponent implements OnInit {
             return;
         } else {
             this.loading = true;
-            this.authService.new(this.loginForm.getRawValue()).subscribe(
+            let payload: any = this.loginForm.getRawValue();
+            payload.rank = this.profile_player.rank;
+
+            this.authService.new(payload).subscribe(
               (authenticate) => {
                 if (authenticate) {
                   this.dialog.showSuccess('Usuário cadastrado com sucesso, faça seu login')

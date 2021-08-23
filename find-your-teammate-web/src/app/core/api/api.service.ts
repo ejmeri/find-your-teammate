@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 // import { URLSearchParams, Http,  Headers,  RequestOptionsArgs } from '@angular/http';
 import { Observable, throwError } from 'rxjs';
@@ -143,8 +143,10 @@ export class ApiService {
 
     private handleError(error: any) {
         let errorMessage: string;
-        if (error instanceof Response || error.status > 0) {
+        if (error instanceof HttpErrorResponse || error.status > 0) {
 
+            console.log(error, ' erorrrrr');
+            
             switch (error.status) {
                 case 200:
                     return error;
@@ -168,6 +170,7 @@ export class ApiService {
                     break;
                 case 500:
                     errorMessage = 'Ocorreu um erro ao efetuar a requisição, se o erro persistir, contante o administrador.';
+                    break;
                 default:
                     let body = { error: null };
                     error.json().then((resp: { error: any; }) => body = resp);
@@ -195,9 +198,9 @@ export class ApiService {
             } catch (ex) {
                 throw new Error('Não foi possível processar sua requisição. Se o erro persistir, contate o suporte do sistema.');
             }
-            if (apiReturn.success === true) {
+            if (apiReturn.status === true) {
                 return apiReturn.response;
-            } else if (apiReturn.success === false) {
+            } else if (apiReturn.status === false) {
                 if (apiReturn.error) {
                     throw new Error(apiReturn.error);
                 } else {

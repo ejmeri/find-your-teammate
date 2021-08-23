@@ -77,9 +77,11 @@ import { CiaUploaderImageComponent } from './components/cia-uploader-image/cia-u
 import { MomentUtcDateAdapter } from './helpers/moment-utc-date-adapter';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxTinymceModule } from 'ngx-tinymce';
+import { PlayerRankingsComponent } from './components/business/player-rankings/player-rankings.component';
 
 
 const COMPONENTS = [
+  PlayerRankingsComponent,
   CiaCardComponent,
   CiaDialogComponent,
   CiaFormRowComponent,

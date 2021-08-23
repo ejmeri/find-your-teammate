@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, ElementRef, OnInit, Renderer2, HostListener } from '@angular/core';
 import { ROUTES } from './sidebar-items';
 import { AuthStore } from 'src/app/core/auth/auth.store';
-import { MenuService } from 'src/app/core/menu/menu.service';
 
 declare const Waves: any;
 @Component({

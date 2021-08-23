@@ -6,11 +6,10 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthStore } from './auth/auth.store';
 import { AuthService } from './auth/auth.service';
-import { MenuService } from './menu/menu.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
-  providers: [AuthGuard, AuthStore, AuthService, ApiService, MenuService],
+  providers: [AuthGuard, AuthStore, AuthService, ApiService],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

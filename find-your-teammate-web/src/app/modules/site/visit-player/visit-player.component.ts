@@ -60,6 +60,10 @@ export class VisitPlayerComponent implements OnInit {
     window.open(this.profile_player.steamUserUrl, '_blank');
   }
 
+  visitGcProfile() {
+    window.open(this.profile_player.gcLink, '_blank');
+  }
+
   findProfilePlayer(playerId: string) {
     this.profilePlayerService.findProfileViewPlayer(playerId).subscribe(
       (profile) => {
@@ -75,27 +79,7 @@ export class VisitPlayerComponent implements OnInit {
     );
   }
 
-  updateProfilePlayer() {
-    this.loading = true;
-    this.profilePlayerService.updateProfilePlayer(this.profile_player).subscribe(
-      (updated) => {
-        this.loading = false;
-        if (updated) {
-          return this.dialog.showSuccess('Perfil atualizado com sucesso');
-        } else {
-          return this.dialog.showSuccess('Erro durante atualização do perfil, por favor, tente novamente');
-        }
-      },
-      (err) => {
-        this.loading = false;
-        this.dialog.showError(err);
-      }
-    );
-  }
-
   selectedTab(event: any) {
-    console.log(event.index);
-
     switch (event.index) {
       case 0:
         this.findPersonalStats();

@@ -145,8 +145,6 @@ export class ApiService {
         let errorMessage: string;
         if (error instanceof HttpErrorResponse || error.status > 0) {
 
-            console.log(error, ' erorrrrr');
-            
             switch (error.status) {
                 case 200:
                     return error;

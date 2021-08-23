@@ -60,6 +60,7 @@ import { MomentUtcDateAdapter } from './helpers/moment-utc-date-adapter';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { PlayerRankingsComponent } from './components/business/player-rankings/player-rankings.component';
+import { CiaSwitchComponent } from './components/cia-switch/cia-switch.component';
 
 
 const COMPONENTS = [
@@ -75,6 +76,7 @@ const COMPONENTS = [
   CiaExpansionPanelComponent,
   CiaFileUploadComponent,
   CiaEditorComponent,
+  CiaSwitchComponent,
 ];
 
 @NgModule({

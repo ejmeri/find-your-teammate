@@ -34,8 +34,6 @@ export class HomeComponent implements OnInit {
     this.service.findPlayers(this.params).subscribe(
       (players) => {
         if (players) {
-          console.log(players);
-
           this.players = players;
         } else {
           return this.dialog.showInfo('Jogadores não encontrados');

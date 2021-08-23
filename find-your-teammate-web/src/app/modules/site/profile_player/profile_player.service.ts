@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ProfilePlayerService {
 
-
   constructor(private api: ApiService) { }
 
 
@@ -28,6 +27,11 @@ export class ProfilePlayerService {
   findPlayers(params: any): Observable<any> {
     return this.api.get('/players/search', params);
   }
+
+  findProfileViewPlayer(userId: string): Observable<any> {
+    return this.api.get(`/players/search/${userId}`);
+  }
+
 
   updateProfilePlayer(profile: any): Observable<any> {
     return this.api.put('/players', profile);

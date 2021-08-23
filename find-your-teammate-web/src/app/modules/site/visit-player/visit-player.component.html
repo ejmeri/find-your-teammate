@@ -49,7 +49,7 @@
                             <div class="col-lg-6">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Steam ID</mat-label>
-                                    <input readonly matInput required placeholder="Steam Id"
+                                    <input matInput required placeholder="Steam Id"
                                         [(ngModel)]="profile_player.steamUserId" />
                                 </mat-form-field>
                             </div>
@@ -91,8 +91,7 @@
                             </div>
                         </cia-form-row>
                         <cia-form-row>
-                            <div class="col-lg-12">
-                                <tinymce [(ngModel)]="profile_player.about" [config]="config"></tinymce>
+                            <div class="col-lg-12" [innerHtml]="profile_player.about">
                             </div>
                         </cia-form-row>
                     </cia-card>

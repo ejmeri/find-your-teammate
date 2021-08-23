@@ -1,34 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthStore } from '../../../core/auth/auth.store';
-import { ProfilePlayerService } from './profile_player.service';
-import { CiaDialogComponent } from '../../../../shared/components/cia-dialog/cia-dialog.component';
+import { CiaDialogComponent } from 'src/shared/components/cia-dialog/cia-dialog.component';
+import { ProfilePlayerService } from '../profile_player/profile_player.service';
+import { ActivatedRoute } from '@angular/router';
+import { RxjsHelpers } from 'src/shared/helpers/rxjs-helpers';
 
 @Component({
-  selector: 'profile_player',
-  templateUrl: './profile_player.component.html',
+  selector: 'visit-player',
+  templateUrl: './visit-player.component.html'
 })
-export class ProfileComponent implements OnInit {
+export class VisitPlayerComponent implements OnInit {
   @ViewChild('dialog') dialog: CiaDialogComponent;
   loadingScreen: boolean = false;
   loading: boolean = false;
-
-  config: any = {
-    height: 250,
-    theme: 'modern',
-    // powerpaste advcode toc tinymcespellchecker a11ychecker mediaembed linkchecker help
-    plugins:
-      'print preview fullpage searchreplace autolink directionality visualblocks visualchars table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount contextmenu colorpicker textpattern',
-    toolbar:
-      'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-    image_advtab: true,
-    imagetools_toolbar: 'rotateleft rotateright | flipv fliph',
-    templates: [
-      { title: 'Test template 1', content: 'Test 1' },
-      { title: 'Test template 2', content: 'Test 2' },
-    ],
-    content_css: ['//fonts.googleapis.com/css?family=Lato:300,300i,400,400i', '//www.tinymce.com/css/codepen.min.css'],
-  };
 
   user_data: any = {};
   profile_player: any = {
@@ -55,20 +38,30 @@ export class ProfileComponent implements OnInit {
   gunStats: Array<any> = [];
 
   mapsStats: Array<any> = [];
+  routeParams$: any;
+  userId: any;
 
-  constructor(private authStore: AuthStore, private profilePlayerService: ProfilePlayerService) {}
+   
+  constructor( private route: ActivatedRoute,private profilePlayerService: ProfilePlayerService, ) {}
 
-  ngOnInit(): void {
-    this.user_data.profileName = this.authStore.loggedUser.profileName;
-    this.findProfilePlayer();
+
+  ngOnInit() {
+    this.routeParams$ = this.route.params.subscribe((params: any) => {
+      this.userId = params['id'];
+      this.findProfilePlayer(this.userId);
+    });
+  }
+
+  ngOnDestroy() {
+    RxjsHelpers.unsubscribe(this.routeParams$);
   }
 
   visitSteamProfile() {
     window.open(this.profile_player.steamUserUrl, '_blank');
   }
 
-  findProfilePlayer() {
-    this.profilePlayerService.findProfilePlayer().subscribe(
+  findProfilePlayer(playerId: string) {
+    this.profilePlayerService.findProfileViewPlayer(playerId).subscribe(
       (profile) => {
         if (!profile.stats) {
           profile.stats = {};
@@ -175,4 +168,5 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
 }

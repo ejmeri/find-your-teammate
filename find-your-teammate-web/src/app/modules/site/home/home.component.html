@@ -1,6 +1,6 @@
 <section class="content">
     <cia-dialog #dialog></cia-dialog>
-
+    <cia-spinner [overlay]="true" [show]="loadingScreen"></cia-spinner>
 
     <div class="centered-content">
         <cia-card title="Filtros">
@@ -46,12 +46,15 @@
                         </div>
                     </cia-card>
                     <div class="card">
-                        <hr>
-                        <cia-spinner-button buttonClass="mat-stroked-button" height="48px" type="button" [inline]="true"
+                        <cia-spinner-button [loading]="loading" (click)="viewProfile(player)" buttonClass="mat-stroked-button" height="48px" type="button" [inline]="true"
                             marginRight="0px" color="primary" icon="send" pull="right" text="Ver perfil">
                         </cia-spinner-button>
                     </div>
+                    <hr>
                 </div>
+            </div>
+            <div *ngIf="!players.length" class="text-center">
+                <h3>Nenhum jogador encontrado no ranking...</h3>
             </div>
         </cia-card>
     </div>

@@ -11,12 +11,14 @@ import { ChangePasswordComponent } from './security/change-password/change-passw
 import { AccessService } from './security/accesses/access.service';
 import { ProfileComponent } from './profile_player/profile_player.component';
 import { ProfilePlayerService } from './profile_player/profile_player.service';
+import { VisitPlayerComponent } from './visit-player/visit-player.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     ChangePasswordComponent,
     ProfileComponent,
+    VisitPlayerComponent,
   ],
   imports: [
     SharedModule,

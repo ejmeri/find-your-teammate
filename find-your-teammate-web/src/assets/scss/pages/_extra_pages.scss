@@ -47,6 +47,8 @@
   align-items: center;
   background-position: center;
   background: #ffffff;
+  min-height: 100vh;
+
   // padding-right: 30px;
   // padding-left: 30px;
 }
@@ -58,7 +60,6 @@
   // align-items: center;
   justify-content: center;
   flex-direction: row-reverse;
-  min-height: 100vh;
   height: 100%;
 }
 .login100-more {

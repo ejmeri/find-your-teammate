@@ -17,4 +17,4 @@ class PlayerRepository():
 
     def update(player):
         return mongo.db.players.update_one(
-            {'userId': ObjectId(player.userId)}, {'$set': {'name': player.name, 'rank': player.rank, 'gcLevel': player.gcLevel, 'gcLink': player.gcLink, 'about': player.about, 'avatarProfileImage': player.avatarProfileImage, 'stats': player.stats}})
+            {'userId': ObjectId(player.userId)}, {'$set': {'name': player.name, 'rank': player.rank, 'gcLevel': player.gcLevel, 'gcLink': player.gcLink,  'inGameLeader': player.inGameLeader, 'about': player.about, 'avatarProfileImage': player.avatarProfileImage, 'stats': player.stats}})

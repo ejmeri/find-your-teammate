@@ -20,7 +20,7 @@ class PlayerStatsService:
             return ApiReturn.error('Não foi possível carregas as estatísticas', str(stats))
 
     @staticmethod
-    def findWeaponsStatus(steamId: str):
+    def findWeaponsStats(steamId: str):
         url_api: str = os.environ['TRACKER_URL_API']
         url: str = url_api + str('/standard/profile/steam/') + \
             steamId + str('/segments/weapon')
@@ -28,7 +28,8 @@ class PlayerStatsService:
             url, headers={'TRN-Api-Key': os.getenv('TRACKER_TOKEN')})
 
         if stats.status_code is 200:
-            return ApiReturn.success(response=stats.json()), 200
+            response = stats.json()
+            return ApiReturn.success(response=response['data']), 200
         else:
             return ApiReturn.error('Não foi possível carregas as estatísticas das armas', stats.json()), 200
 
@@ -41,6 +42,7 @@ class PlayerStatsService:
             url, headers={'TRN-Api-Key': os.getenv('TRACKER_TOKEN')})
 
         if stats.status_code is 200:
-            return ApiReturn.success(response=stats.json()), 200
+            response = stats.json()
+            return ApiReturn.success(response=response['data']), 200
         else:
             return ApiReturn.error('Não foi possível carregas as estatísticas dos mapas', stats.json()), 200

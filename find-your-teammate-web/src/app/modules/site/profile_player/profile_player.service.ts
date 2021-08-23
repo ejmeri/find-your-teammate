@@ -25,6 +25,10 @@ export class ProfilePlayerService {
     return this.api.get(`/players/${_id}/stats/${steamUserId}/maps`)
   }
 
+  findPlayers(params: any): Observable<any> {
+    return this.api.get('/players/search', params);
+  }
+
   updateProfilePlayer(profile: any): Observable<any> {
     return this.api.put('/players', profile);
   }

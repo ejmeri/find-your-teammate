@@ -1,9 +1,58 @@
 <section class="content">
+    <cia-dialog #dialog></cia-dialog>
+
 
     <div class="centered-content">
-
-        <cia-card title="Elmeri" subtitle="Ak Cruzada" divider="true">
-            <H1>OI NÉ</H1>
+        <cia-card title="Filtros">
+            <cia-form-row>
+                <div class="col-lg-6">
+                    <player-rankings name="rankings" [(ngModel)]="params.rank"></player-rankings>
+                </div>
+                <div class="col-lg-6 pt-8">
+                    <div class="pull-right">
+                        <cia-spinner-button buttonClass="mat-stroked-button" height="48px" type="button"
+                            (click)="searchPlayers()" [inline]="true" marginRight="0px" color="primary" icon="search"
+                            pull="right" text="Pesquisar">
+                        </cia-spinner-button>
+                    </div>
+                </div>
+            </cia-form-row>
+        </cia-card>
+        <cia-card title="Jogadores">
+            <div *ngFor="let player of players">
+                <div class="m-b-20">
+                    <cia-card intern="true">
+                        <div class="contact-grid">
+                            <div class="profile-header bg-dark">
+                                <div class="user-name">{{ player.name }}</div>
+                                <div class="name-center">{{ player.rank }} - {{ player.rank }}
+                                </div>
+                            </div>
+                            <img src="{{ player.avatarProfileImage }}" class="user-img" alt="">
+                            <div class="row">
+                                <div class="col-4">
+                                    <h5>{{ player.stats.kills}}</h5>
+                                    <small>Abates</small>
+                                </div>
+                                <div class="col-4">
+                                    <h5>{{ player.stats.deaths}}</h5>
+                                    <small>Mortes</small>
+                                </div>
+                                <div class="col-4">
+                                    <h5>{{ player.stats.kd}}</h5>
+                                    <small>K/D</small>
+                                </div>
+                            </div>
+                        </div>
+                    </cia-card>
+                    <div class="card">
+                        <hr>
+                        <cia-spinner-button buttonClass="mat-stroked-button" height="48px" type="button" [inline]="true"
+                            marginRight="0px" color="primary" icon="send" pull="right" text="Ver perfil">
+                        </cia-spinner-button>
+                    </div>
+                </div>
+            </div>
         </cia-card>
     </div>
 </section>

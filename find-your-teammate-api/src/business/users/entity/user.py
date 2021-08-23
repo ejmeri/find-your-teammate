@@ -18,20 +18,6 @@ class User:
     def hashPassword(self):
         self.password = generate_password_hash(self.password)
 
-    @staticmethod
-    def encode_auth_token(user_id):
-        try:
-            payload = {
-                'user_id': user_id
-            }
-            return jwt.encode(
-                payload,
-                app.JWT_TOKEN,
-                algorithm='HS256'
-            )
-        except Exception as e:
-            return e
-
     def toCreateJson(self):
         return {
             '_id': self._id,

@@ -7,13 +7,10 @@ from src.shared.api_return import ApiReturn
 class PlayerStatsService:
     @staticmethod
     def findPersonalStats(steamId: str):
-        url_api: str = str(os.environ['TRACKER_URL_API'])
-        url: str = url_api + str('/standard/profile/steam/' + steamId)
+        url_api: str = "https://public-api.tracker.gg/v2/csgo/standard/profile/steam/" + steamId
         stats = requests.get(
-            url, headers={'TRN-Api-Key': os.getenv('TRACKER_TOKEN')})
+            url_api, headers={'TRN-Api-Key': "OTKEN"})
 
-        print(str(stats))
-        
         if stats.status_code is 200:
             return stats.json()
         else:
@@ -21,11 +18,10 @@ class PlayerStatsService:
 
     @staticmethod
     def findWeaponsStats(steamId: str):
-        url_api: str = os.environ['TRACKER_URL_API']
-        url: str = url_api + str('/standard/profile/steam/') + \
-            steamId + str('/segments/weapon')
+        url_api: str = "https://public-api.tracker.gg/v2/csgo/standard/profile/steam/" + \
+            steamId + '/segments/weapon'
         stats = requests.get(
-            url, headers={'TRN-Api-Key': os.getenv('TRACKER_TOKEN')})
+            url_api, headers={'TRN-Api-Key': "OTKEN"})
 
         if stats.status_code is 200:
             response = stats.json()
@@ -35,11 +31,10 @@ class PlayerStatsService:
 
     @staticmethod
     def findMapsStats(steamId: str):
-        url_api: str = os.getenv('TRACKER_URL_API')
-        url = url_api + str('/standard/profile/steam/') + \
+        url_api: str = "https://public-api.tracker.gg/v2/csgo/standard/profile/steam/" + \
             steamId + str('/segments/map')
         stats = requests.get(
-            url, headers={'TRN-Api-Key': os.getenv('TRACKER_TOKEN')})
+            url_api, headers={'TRN-Api-Key': "OTKEN"})
 
         if stats.status_code is 200:
             response = stats.json()

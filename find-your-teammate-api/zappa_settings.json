@@ -1,9 +1,9 @@
 {
     "dev": {
         "app_function": "app.app",
-        "aws_region": "us-east-1",
+        "aws_region": "us-east-2",
         "profile_name": "default",
-        "project_name": "find-your-csgo-teammate-api",
+        "project_name": "find-your-csgo-team-mate-api",
         "runtime": "python3.7",
         "s3_bucket": "zappa-jinhdkmb7"
     }
